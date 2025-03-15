@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useDataStore } from "./stores/useDataStore";
 
 function AddCourse() {
   const [text, setText] = useState("");
+  const addNewCourse = useDataStore((state) => state.addNewCourse);
 
   const handleClick = () => {
+    addNewCourse(text);
     setText("");
   };
 

@@ -13,7 +13,7 @@ function Header() {
         <Link className="hover:underline" to="/addnote">
           Lisää kurssille muistiinpano
         </Link>
-        <Link className="hover:underline" to="/listnotes">
+        <Link className="hover:underline" to="/listcourses">
           Hae muistiinpanot
         </Link>
         <Link className="hover:underline" to="/addcourse">

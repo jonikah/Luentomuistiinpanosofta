@@ -1,11 +1,11 @@
-function CourseRow({ data }) {
+function CourseRow({ courses }) {
   return (
-    <div style={{ border: "1px solid black" }}>
-      <p>{data.id}</p>
-      <p>{data.text}</p>
-      <p>{data.courseid}</p>
-      <p>{data.name}</p>
-      <p>{data.timestamp}</p>
+    <div className="border-1 bg-neutral-50">
+      <p>{courses.id}</p>
+      <p>{courses.text}</p>
+      <p>{courses.courseid}</p>
+      <p>{courses.name}</p>
+      <p>{courses.timestamp}</p>
     </div>
   );
 }

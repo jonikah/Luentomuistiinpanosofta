@@ -4,10 +4,10 @@
 
 - Toiminnan kuvausta...
 
-## Kehitysversion käynnistys
+## Komennot sovelluksen kehitysversion käynnistämiseen
 
 - `npm install`
-  Asennetaan projektin riippuvuudet.
+  Asentaa projektin riippuvuudet.
 
 - `npm run dev`
-  Käynnistetään kehitys-modessa.
+  Käynnistää sovelluksen kehitystilassa.

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import DropdownMenu from "./DropdownMenu";
+import { useDataStore } from "./stores/useDataStore";
 
-function TextInput() {
+function AddNoteToCourse() {
   const [text, setText] = useState("");
+  const addNote = useDataStore((state) => state.addNote);
 
   const handleClick = () => {
+    console.log({ text });
+    addNote(text);
     setText("");
   };
 
@@ -19,6 +23,7 @@ function TextInput() {
       <textarea
         className=" bg-white w-200 h-20"
         onChange={(e) => handleChange(e)}
+        // Tähän voi laittaa suoraankin setTextin!
         value={text}
       ></textarea>
       <br />
@@ -35,4 +40,4 @@ function TextInput() {
   );
 }
 
-export default TextInput;
+export default AddNoteToCourse;
