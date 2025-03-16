@@ -4,8 +4,10 @@ import { useDataStore } from "./stores/useDataStore";
 function AddCourse() {
   const [text, setText] = useState("");
   const addNewCourse = useDataStore((state) => state.addNewCourse);
+  const incrementId = useDataStore((state) => state.incrementId);
 
   const handleClick = () => {
+    incrementId();
     addNewCourse(text);
     setText("");
   };

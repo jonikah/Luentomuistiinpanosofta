@@ -1,10 +1,10 @@
 function CourseRow({ courses }) {
   return (
     <div className="border-1 bg-neutral-50">
-      <p>{courses.id}</p>
-      <p>{courses.text}</p>
-      <p>{courses.courseid}</p>
-      <p>{courses.name}</p>
+      <p>Kurssin id: {courses.id}</p>
+      <p>Muistiinpano: {courses.text}</p>
+      <p>Opintojaksotunnus: {courses.course.id}</p>
+      <p>Opintojakso: {courses.course.name}</p>
       <p>{courses.timestamp}</p>
     </div>
   );

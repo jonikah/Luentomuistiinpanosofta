@@ -6,16 +6,14 @@ function DropdownMenu() {
   return (
     <div>
       <select className="bg-white mb-4">
-        {courses.map((d, i) => {
-          return <option value={i}>{d.name}</option>;
+        {courses.map((course) => {
+          return (
+            <option value={course.course.name} key={course.id}>
+              {course.course.name}
+            </option>
+          );
         })}
       </select>
-
-      {/* <select className="bg-white mb-4">
-        <option value={"Versionhallinta"}>Versionhallinta</option>
-        <option value={"Ruotsi"}>Ruotsi</option>
-        <option value={"JavaScript"}>JavaScript</option>
-      </select> */}
       <br />
     </div>
   );

@@ -10,6 +10,18 @@ function AddNoteToCourse() {
     console.log({ text });
     addNote(text);
     setText("");
+    const timestamp = Date.now();
+    console.log(timestamp.toString());
+    console.log(
+      new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(timestamp)
+    );
   };
 
   const handleChange = (e) => {
@@ -23,7 +35,6 @@ function AddNoteToCourse() {
       <textarea
         className=" bg-white w-200 h-20"
         onChange={(e) => handleChange(e)}
-        // Tähän voi laittaa suoraankin setTextin!
         value={text}
       ></textarea>
       <br />
