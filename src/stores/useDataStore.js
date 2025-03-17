@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-let courses_orig = [
+let notes_orig = [
   {
     id: 0,
     text: "add lisää",
@@ -39,32 +39,57 @@ let courses_orig = [
   },
 ];
 
-let id_start = courses_orig.length;
+let courses_orig = [
+  {
+    id: 0,
+    name: "versionhallinta",
+  },
+  {
+    id: 1,
+    name: "java",
+  },
+  {
+    id: 2,
+    name: "ruotsi",
+  },
+  {
+    id: 3,
+    name: "ohjelmointi1",
+  },
+];
 
 const useDataStore = create((set) => ({
   courses: courses_orig,
-  id: id_start,
+  notes: notes_orig,
 
-  addNote: (note) => set((state) => ({ courses: [...state.courses, note] })),
+  addNote: (note, courseId) =>
+    set((state) => ({
+      notes: [
+        ...state.notes,
+        {
+          id: state.notes.length,
+          text: note,
+          course: {
+            id: courseId,
+            name: state.courses[courseId].name,
+          },
+          timestamp: "2022-11-22T08:23:12",
+        },
+      ],
+    })),
 
-  //   addNewCourse: (course) =>
-  //     set((state) => ({ courses: [...state.courses, course] })),
-  // }));
-
-  incrementId: () => set((state) => ({ id: state.id + 1 })),
+  deleteNote: (note) =>
+    set((state) => ({
+      notes: state.notes.filter((r) => r.id != note.id),
+    })),
 
   addNewCourse: (course) =>
     set((state) => ({
       courses: [
         ...state.courses,
         {
-          id: state.id,
-          text: "",
-          course: {
-            id: 2,
-            name: course,
-          },
-          timestamp: new Date(),
+          id: state.courses.length,
+          name: course,
         },
       ],
     })),

@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useDataStore } from "./stores/useDataStore";
 
 function Header() {
+  const courses = useDataStore((state) => state.courses);
+
   return (
     <div>
       <h1 className="text-4xl font-bold mb-8 text-center ">
@@ -10,9 +13,16 @@ function Header() {
         <Link className="hover:underline" to="/">
           Etusivu
         </Link>
-        <Link className="hover:underline" to="/addnote">
-          Lisää kurssille muistiinpano
-        </Link>
+        {courses.length == 0 && (
+          <Link className="hover:underline text-gray-400">
+            Lisää kurssille muistiinpano
+          </Link>
+        )}{" "}
+        {courses.length > 0 && (
+          <Link className="hover:underline" to="/addnote">
+            Lisää kurssille muistiinpano
+          </Link>
+        )}
         <Link className="hover:underline" to="/listcourses">
           Hae muistiinpanot
         </Link>

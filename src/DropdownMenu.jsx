@@ -8,8 +8,8 @@ function DropdownMenu() {
       <select className="bg-white mb-4">
         {courses.map((course) => {
           return (
-            <option value={course.course.name} key={course.id}>
-              {course.course.name}
+            <option value={course.name} key={course.id}>
+              {course.name}
             </option>
           );
         })}

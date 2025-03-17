@@ -3,13 +3,17 @@ import { useDataStore } from "./stores/useDataStore";
 
 function AddCourse() {
   const [text, setText] = useState("");
+  const [Pressed, setPressed] = useState("");
+
   const addNewCourse = useDataStore((state) => state.addNewCourse);
-  const incrementId = useDataStore((state) => state.incrementId);
+  const courses = useDataStore((state) => state.courses);
 
   const handleClick = () => {
-    incrementId();
+    // incrementId();
+    console.log(text);
     addNewCourse(text);
     setText("");
+    setPressed(true);
   };
 
   const handleChange = (e) => {
@@ -20,7 +24,7 @@ function AddCourse() {
   return (
     <div>
       <textarea
-        className=" bg-white w-100 h-10"
+        className=" bg-white w-100 h-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         onChange={(e) => handleChange(e)}
         value={text}
       ></textarea>
@@ -31,6 +35,13 @@ function AddCourse() {
       >
         Lisää kurssi
       </button>
+
+      {Pressed == true && (
+        <p>
+          opintojakso '{courses[courses.length - 1].name}' lisätty id:llä{" "}
+          {courses.length}
+        </p>
+      )}
     </div>
   );
 }

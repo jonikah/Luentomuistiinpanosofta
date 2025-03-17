@@ -3,20 +3,21 @@ import DropdownMenu from "./DropdownMenu";
 import { useDataStore } from "./stores/useDataStore";
 
 function ListCourses() {
-  const courses = useDataStore((state) => state.courses);
+  const notes = useDataStore((state) => state.notes);
 
   return (
     <div>
-      <DropdownMenu />
-      <p className="mb-4">Kaikki kurssit:</p>
-      {courses.length > 0 && (
+      {notes.length > 0 && (
         <div className="grid gap-4">
-          {courses.map((d, i) => {
-            return <CourseRow courses={d} key={i} />;
+          <DropdownMenu />
+          {notes.map((note, i) => {
+            {
+              return <CourseRow notes={note} key={note.id} />;
+            }
           })}
         </div>
       )}
-      {courses.length == 0 && <p>Ei muistiinpanoja!</p>}
+      {notes.length == 0 && <p>Ei muistiinpanoja!</p>}
     </div>
   );
 }
