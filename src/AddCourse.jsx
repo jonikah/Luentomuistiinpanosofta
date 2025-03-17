@@ -3,17 +3,16 @@ import { useDataStore } from "./stores/useDataStore";
 
 function AddCourse() {
   const [text, setText] = useState("");
-  const [Pressed, setPressed] = useState("");
+  const [PressedAdd, setPressedAdd] = useState(false);
 
   const addNewCourse = useDataStore((state) => state.addNewCourse);
   const courses = useDataStore((state) => state.courses);
 
   const handleClick = () => {
-    // incrementId();
     console.log(text);
     addNewCourse(text);
     setText("");
-    setPressed(true);
+    setPressedAdd(true);
   };
 
   const handleChange = (e) => {
@@ -36,7 +35,7 @@ function AddCourse() {
         Lisää kurssi
       </button>
 
-      {Pressed == true && (
+      {PressedAdd && (
         <p>
           opintojakso '{courses[courses.length - 1].name}' lisätty id:llä{" "}
           {courses.length}
