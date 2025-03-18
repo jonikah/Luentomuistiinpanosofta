@@ -23,6 +23,7 @@ function AddNoteToCourse() {
   const handleClickBack = () => {
     setCourseChosen(false);
     setNoteAdded(false);
+    setText("");
   };
 
   const handleChange = (e) => {
@@ -39,7 +40,7 @@ function AddNoteToCourse() {
   return (
     <div>
       <div>
-        {courseChosen == false && (
+        {!courseChosen && (
           <div>
             <span className="text-xl p-2">Kurssi: </span>
             <select
