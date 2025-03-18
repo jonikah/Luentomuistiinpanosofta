@@ -4,18 +4,18 @@ import Note from "./Note";
 
 function AddNoteToCourse() {
   const [text, setText] = useState("");
-  const [dropdownvalue, setValue] = useState(0);
+  const [dropdownValue, setDropdownValue] = useState();
   const [courseChosen, setCourseChosen] = useState(false);
   const [noteAdded, setNoteAdded] = useState(false);
-
+  const [firstAddedNoteId, setFirstAddedNoteId] = useState();
   const addNote = useDataStore((state) => state.addNote);
   const courses = useDataStore((state) => state.courses);
   const notes = useDataStore((state) => state.notes);
 
   const handleClick = () => {
-    console.log({ text });
-    console.log({ dropdownvalue });
-    addNote(text, dropdownvalue);
+    // console.log({ text });
+    // console.log({ dropdownValue });
+    addNote(text, dropdownValue);
     setText("");
     setNoteAdded(true);
   };
@@ -24,17 +24,19 @@ function AddNoteToCourse() {
     setCourseChosen(false);
     setNoteAdded(false);
     setText("");
+    setDropdownValue();
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setText(e.target.value);
   };
 
   const handleChangeDropdown = (e_select) => {
     console.log(e_select.target.value);
-    setValue(e_select.target.value);
+    setDropdownValue(e_select.target.value);
     setCourseChosen(true);
+    setFirstAddedNoteId(notes[notes.length - 1].id);
   };
 
   return (
@@ -46,9 +48,9 @@ function AddNoteToCourse() {
             <select
               className="bg-white w-auto h-auto rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               onChange={(e_select) => handleChangeDropdown(e_select)}
-              dropdownvalue={dropdownvalue}
+              dropdownValue={dropdownValue}
             >
-              {courses.map((course) => {
+              {courses.map((course, i) => {
                 return (
                   <option value={course.id} key={course.id}>
                     {course.name}
@@ -63,7 +65,7 @@ function AddNoteToCourse() {
         {courseChosen && (
           <div>
             <span className="text-xl p-2">
-              Kurssi: {courses[dropdownvalue].name}{" "}
+              Kurssi: {courses[dropdownValue].name}{" "}
             </span>
             <textarea
               className=" bg-white w-200 h-20 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -86,13 +88,17 @@ function AddNoteToCourse() {
           </div>
         )}
       </div>
-      {/* Rajattava notes.course.id:llä!! Ota dropdownvalue ja käytä sitä jotenkin... */}
       {noteAdded &&
-        notes.map((note, i) => {
-          {
-            return <Note notes={note} key={notes.id} />;
-          }
-        })}
+        notes
+          .filter((note) => note.id > notes[firstAddedNoteId].id)
+          .map((note, i) => {
+            {
+              {
+                console.log(note);
+                return <Note notes={note} key={notes.id} />;
+              }
+            }
+          })}
     </div>
   );
 }
