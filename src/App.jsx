@@ -4,8 +4,9 @@ import Home from "./Home";
 import Header from "./Header";
 import Footer from "./Footer";
 import AddNoteToCourse from "./AddNoteToCourse";
-import ListCourses from "./ListCourses";
+import ListNotes from "./ListNotes";
 import AddCourse from "./AddCourse";
+import "./styles/App.css";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="addnote" element={<AddNoteToCourse />} />
-          <Route path="listcourses" element={<ListCourses />} />
+          <Route path="listnotes" element={<ListNotes />} />
           <Route path="addcourse" element={<AddCourse />} />
         </Route>
       </Routes>
