@@ -8,7 +8,7 @@ let notes_orig = [
       id: 0,
       name: "versionhallinta",
     },
-    timestamp: "2022-11-23T13:13:13",
+    timestamp: "2022-10-23 13:13:13",
   },
   {
     id: 1,
@@ -17,7 +17,7 @@ let notes_orig = [
       id: 0,
       name: "versionhallinta",
     },
-    timestamp: "2022-11-23T13:33:13",
+    timestamp: "2022-10-23 13:33:47",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ let notes_orig = [
       id: 0,
       name: "versionhallinta",
     },
-    timestamp: "2022-11-24T13:13:13",
+    timestamp: "2022-10-24 13:53:18",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ let notes_orig = [
       id: 2,
       name: "ruotsi",
     },
-    timestamp: "2022-11-22T08:23:12",
+    timestamp: "2022-11-01 08:23:12",
   },
 ];
 
@@ -58,7 +58,7 @@ let courses_orig = [
   },
 ];
 
-const useDataStore = create((set) => ({
+const useDataStore = create((set, get) => ({
   courses: courses_orig,
   notes: notes_orig,
 
@@ -73,7 +73,18 @@ const useDataStore = create((set) => ({
             id: courseId,
             name: state.courses[courseId].name,
           },
-          timestamp: "2022-11-22T08:23:12",
+          timestamp:
+            new Date().getFullYear() +
+            "-" +
+            String(new Date().getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0") +
+            " " +
+            String(new Date().getHours()).padStart(2, "0") +
+            ":" +
+            String(new Date().getMinutes()).padStart(2, "0") +
+            ":" +
+            String(new Date().getSeconds()).padStart(2, "0"),
         },
       ],
     })),
