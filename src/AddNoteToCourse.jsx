@@ -10,6 +10,7 @@ function AddNoteToCourse() {
   const [firstAddedNoteId, setFirstAddedNoteId] = useState(0);
 
   const addNote = useDataStore((state) => state.addNote);
+  const incrementNoteId = useDataStore((state) => state.incrementNoteId);
   const courses = useDataStore((state) => state.courses);
   const notes = useDataStore((state) => state.notes);
 
@@ -17,6 +18,7 @@ function AddNoteToCourse() {
     // console.log({ text });
     // console.log({ value });
     addNote(text, value);
+    incrementNoteId();
     setText("");
     setNoteAdded(true);
   };
@@ -40,7 +42,7 @@ function AddNoteToCourse() {
     if (notes.length < 1) {
       setFirstAddedNoteId(0);
     } else {
-      setFirstAddedNoteId(notes.length);
+      setFirstAddedNoteId(notes[notes.length - 1].id);
     }
   };
 
@@ -101,7 +103,7 @@ function AddNoteToCourse() {
       </div>
       {noteAdded &&
         notes
-          .filter((note) => note.id >= firstAddedNoteId)
+          .filter((note) => note.id > firstAddedNoteId)
           .map((note, i) => {
             {
               {
