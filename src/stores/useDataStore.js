@@ -23,6 +23,7 @@ const useDataStore = create((set) => ({
   // notes: notes_orig,
   courses: [],
   notes: [],
+  noteId: 0,
 
   fetchCourses: async () => {
     const apiCourses = await getCourses();
@@ -32,6 +33,7 @@ const useDataStore = create((set) => ({
   fetchNotes: async () => {
     const apiNotes = await getNotes();
     set({ notes: apiNotes });
+    set({ noteId: apiNotes.length });
   },
 
   addNote: (note, courseId) =>
@@ -39,7 +41,7 @@ const useDataStore = create((set) => ({
       notes: [
         ...state.notes,
         {
-          id: state.notes[state.notes.length - 1].id + 1,
+          id: state.noteId,
           text: note,
           course: {
             id: courseId,
@@ -60,6 +62,8 @@ const useDataStore = create((set) => ({
         },
       ],
     })),
+
+  incrementNoteId: () => set((state) => ({ noteId: state.noteId + 1 })),
 
   deleteNote: (note) =>
     set((state) => ({
