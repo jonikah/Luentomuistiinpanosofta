@@ -1,73 +1,45 @@
 import { create } from "zustand";
 
-let notes_orig = [
-  {
-    id: 0,
-    text: "add lisää",
-    course: {
-      id: 0,
-      name: "versionhallinta",
-    },
-    timestamp: "2022-10-23 13:13:13",
-  },
-  {
-    id: 1,
-    text: "commit tallenta",
-    course: {
-      id: 0,
-      name: "versionhallinta",
-    },
-    timestamp: "2022-10-23 13:33:47",
-  },
-  {
-    id: 2,
-    text: "push työntää muutokset remoteen",
-    course: {
-      id: 0,
-      name: "versionhallinta",
-    },
-    timestamp: "2022-10-24 13:53:18",
-  },
-  {
-    id: 3,
-    text: "talar du svenska",
-    course: {
-      id: 2,
-      name: "ruotsi",
-    },
-    timestamp: "2022-11-01 08:23:12",
-  },
-];
+const getCourses = async () => {
+  const url =
+    "https://luentomuistiinpano-api.netlify.app/.netlify/functions/courses";
+  const response = await fetch(url);
+  const apiCourses = await response.json();
+  // console.log(apiCourses);
+  return apiCourses;
+};
 
-let courses_orig = [
-  {
-    id: 0,
-    name: "versionhallinta",
-  },
-  {
-    id: 1,
-    name: "java",
-  },
-  {
-    id: 2,
-    name: "ruotsi",
-  },
-  {
-    id: 3,
-    name: "ohjelmointi1",
-  },
-];
+const getNotes = async () => {
+  const url =
+    "https://luentomuistiinpano-api.netlify.app/.netlify/functions/notes";
+  const response = await fetch(url);
+  const apiNotes = await response.json();
+  // console.log(apiNotes);
+  return apiNotes;
+};
 
-const useDataStore = create((set, get) => ({
-  courses: courses_orig,
-  notes: notes_orig,
+const useDataStore = create((set) => ({
+  // courses: courses_orig,
+  // notes: notes_orig,
+  courses: [],
+  notes: [],
+
+  fetchCourses: async () => {
+    const apiCourses = await getCourses();
+    set({ courses: apiCourses });
+  },
+
+  fetchNotes: async () => {
+    const apiNotes = await getNotes();
+    set({ notes: apiNotes });
+  },
 
   addNote: (note, courseId) =>
     set((state) => ({
       notes: [
         ...state.notes,
         {
-          id: state.notes.length,
+          id: state.notes[state.notes.length - 1].id + 1,
           text: note,
           course: {
             id: courseId,
