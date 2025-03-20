@@ -8,7 +8,15 @@ import ListNotes from "./ListNotes";
 import AddCourse from "./AddCourse";
 import "./styles/App.css";
 
+import { useDataStore } from "./stores/useDataStore";
+
 function App() {
+  const fetchNotes = useDataStore((state) => state.fetchNotes);
+  const fetchCourses = useDataStore((state) => state.fetchCourses);
+
+  fetchNotes();
+  fetchCourses();
+
   return (
     <div>
       <Routes>
