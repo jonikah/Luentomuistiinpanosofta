@@ -9,10 +9,11 @@ function AddCourse() {
   const courses = useDataStore((state) => state.courses);
 
   const handleClick = () => {
-    console.log(text);
+    // console.log(text);
     addNewCourse(text);
     setText("");
     setPressedAdd(true);
+    // console.log(courses);
   };
 
   const handleChange = (e) => {
