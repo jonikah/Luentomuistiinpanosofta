@@ -3,9 +3,8 @@ import { useDataStore } from "./stores/useDataStore";
 
 function CourseRow({ notes }) {
   const deleteNote = useDataStore((state) => state.deleteNote);
-
   const handleCloseClick = (note) => {
-    console.log(note);
+    // console.log(note);
     deleteNote(note);
   };
 
