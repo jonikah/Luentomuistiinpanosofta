@@ -10,7 +10,7 @@ body {
 }
 
 button:disabled {
-  background-color: #82b4e9;
+  background-color: #81abd7;
   color: #ffffff;
   cursor: not-allowed;
 }
