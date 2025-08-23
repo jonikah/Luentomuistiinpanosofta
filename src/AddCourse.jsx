@@ -9,39 +9,47 @@ function AddCourse() {
   const courses = useDataStore((state) => state.courses);
 
   const handleClick = () => {
-    // console.log(text);
-    addNewCourse(text);
+    if (!text.trim()) return;
+    addNewCourse(text.trim());
     setText("");
     setPressedAdd(true);
-    // console.log(courses);
   };
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     setText(e.target.value);
   };
 
   return (
-    <div>
-      <textarea
-        className=" bg-white w-100 h-10 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        onChange={(e) => handleChange(e)}
-        value={text}
-      ></textarea>
-      <br />
-      <button
-        className="bg-blue-500 m-6 text-white font semibold px-2 py-2 rounded-md hover:bg-blue-600"
-        onClick={handleClick}
-      >
-        Lisää kurssi
-      </button>
+    <div className="max-w-lg mx-auto mt-5">
+      <div className="bg-white shadow-xl rounded-2xl p-6 border border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Lisää uusi kurssi
+        </h2>
 
-      {PressedAdd && (
-        <p>
-          opintojakso '{courses[courses.length - 1].name}' lisätty id:llä{" "}
-          {courses.length}
-        </p>
-      )}
+        <textarea
+          className="w-full h-24 p-3 border border-gray-300 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          placeholder="Kirjoita kurssin nimi..."
+          onChange={handleChange}
+          value={text}
+        />
+
+        <button
+          className="mt-4 w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow-md hover:scale-[1.02] hover:from-blue-600 hover:to-blue-700 transition-transform"
+          onClick={handleClick}
+        >
+          ➕ Lisää kurssi
+        </button>
+
+        {PressedAdd && courses.length > 0 && (
+          <p className="mt-4 text-green-600 font-medium">
+            ✅ Opintojakso{" "}
+            <span className="font-semibold">
+              "{courses[courses.length - 1].name}"
+            </span>{" "}
+            lisätty (ID: {courses.length})
+          </p>
+        )}
+      </div>
     </div>
   );
 }

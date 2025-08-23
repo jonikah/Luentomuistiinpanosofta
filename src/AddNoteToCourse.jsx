@@ -15,9 +15,8 @@ function AddNoteToCourse() {
   const notes = useDataStore((state) => state.notes);
 
   const handleClick = () => {
-    // console.log({ text });
-    // console.log({ value });
-    addNote(text, value);
+    if (!text.trim()) return;
+    addNote(text.trim(), value);
     incrementNoteId();
     setText("");
     setNoteAdded(true);
@@ -31,12 +30,10 @@ function AddNoteToCourse() {
   };
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     setText(e.target.value);
   };
 
   const handleChangeDropdown = (e_select) => {
-    // console.log(e_select.target.value);
     setValue(e_select.target.value);
     setCourseChosen(true);
     if (notes.length < 1) {
@@ -47,71 +44,75 @@ function AddNoteToCourse() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="max-w-2xl mx-auto mt-10">
+      <div className="bg-white shadow-xl rounded-2xl p-6 border border-gray-200">
         {!courseChosen && (
           <div>
-            <span className="text-xl p-2">Kurssi: </span>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Lisää muistiinpano
+            </h2>
+            <label className="block mb-2 text-gray-700 font-medium">
+              Valitse kurssi:
+            </label>
             <select
-              className="bg-white w-auto h-auto rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              onChange={(e_select) => handleChangeDropdown(e_select)}
-              value={value}
+              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              onChange={handleChangeDropdown}
+              value={value || ""}
             >
-              <option>Valitse</option>
-              {courses.map((course) => {
-                return (
-                  <option value={course.id} key={course.id}>
-                    {course.name}
-                  </option>
-                );
-              })}
+              <option value="" disabled>
+                -- Valitse kurssi --
+              </option>
+              {courses.map((course) => (
+                <option value={course.id} key={course.id}>
+                  {course.name}
+                </option>
+              ))}
             </select>
-            <br />
           </div>
         )}
 
         {courseChosen && (
           <div>
-            <p className="text-2xl ">Kurssi: {courses[value].name} </p>
-            <p className="text-gray-500 font-extralight">
-              (Huom! Muistiinpano ei voi olla tyhjä kenttä.)
+            <p className="text-xl font-semibold text-gray-800 mb-2">
+              Kurssi:{" "}
+              <span className="text-blue-600">{courses[value].name}</span>
+            </p>
+            <p className="text-sm text-gray-500 mb-3">
+              (Huom! Muistiinpano ei voi olla tyhjä.)
             </p>
             <textarea
-              className=" bg-white w-200 h-20 mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              onChange={(e) => handleChange(e)}
+              className="w-full h-28 p-3 border border-gray-300 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              placeholder="Kirjoita muistiinpano..."
+              onChange={handleChange}
               value={text}
-            ></textarea>
-            <br />
-
-            <div>
+            />
+            <div className="flex gap-3 mt-4">
               <button
-                className="bg-blue-500  text-white font m-5 semibold px-2 py-2 rounded-md hover:bg-blue-600"
+                className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow-md hover:scale-[1.02] hover:from-blue-600 hover:to-blue-700 transition-transform disabled:opacity-50"
                 onClick={handleClick}
-                disabled={!text}
+                disabled={!text.trim()}
               >
-                Lisää muistiinpano
+                💾 Tallenna muistiinpano
               </button>
               <button
-                className="bg-zinc-500 text-white px-3 py-2 rounded-md hover:bg-zinc-600"
+                className="flex-1 bg-gray-500 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:bg-gray-600 transition"
                 onClick={handleClickBack}
               >
-                Palaa
+                🔙 Palaa
               </button>
             </div>
           </div>
         )}
       </div>
+
       {noteAdded &&
         notes
           .filter((note) => note.id > firstAddedNoteId)
-          .map((note, i) => {
-            {
-              {
-                // console.log(note);
-                return <Note notes={note} key={note.id} />;
-              }
-            }
-          })}
+          .map((note) => (
+            <div key={note.id} className="mt-6">
+              <Note notes={note} />
+            </div>
+          ))}
     </div>
   );
 }

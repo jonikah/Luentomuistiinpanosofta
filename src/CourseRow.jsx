@@ -1,36 +1,43 @@
 import { useDataStore } from "./stores/useDataStore";
-// import { useState } from "react";
 
 function CourseRow({ notes }) {
   const deleteNote = useDataStore((state) => state.deleteNote);
+
+  // Poistaa muistiinpanon
   const handleCloseClick = (note) => {
-    // console.log(note);
     deleteNote(note);
   };
 
+  if (!notes.text || notes.text.length === 0) return null;
+
   return (
     <div className="p-2">
-      {notes.text.length > 0 && (
-        <div className="border-1 bg-neutral-50">
-          <div className=" relative">
-            <button
-              className="absolute right-2 text-gray-400 
-        hover:text-gray-600 text-2xl"
-              onClick={() => handleCloseClick(notes)}
-            >
-              [x]
-            </button>
-            <div>
-              {/* <p>Muistiinpanon id: {notes.id}</p> */}
-              <p className="font-thin mb-2">
-                {notes.timestamp} {notes.course.name} (id {notes.course.id})
-              </p>
-              <p className="font-extralight"> {notes.text}</p>
-            </div>
-          </div>
+      <div className="bg-white shadow-md rounded-xl p-4 border border-gray-200 relative hover:shadow-lg transition">
+        {/* Poistopainike */}
+        <button
+          className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition text-lg font-bold"
+          onClick={() => handleCloseClick(notes)}
+          aria-label="Poista muistiinpano"
+        >
+          ×
+        </button>
+
+        {/* Yläosa: aikaleima & kurssi */}
+        <div className="mb-2">
+          <p className="text-sm text-gray-500">🕒 {notes.timestamp}</p>
+          <p className="text-sm text-blue-600 font-medium">
+            📘 {notes.course.name}{" "}
+            <span className="text-gray-400">(id {notes.course.id})</span>
+          </p>
         </div>
-      )}
+
+        {/* Muistiinpanon sisältö */}
+        <p className="text-gray-800 leading-relaxed whitespace-pre-line">
+          {notes.text}
+        </p>
+      </div>
     </div>
   );
 }
+
 export default CourseRow;

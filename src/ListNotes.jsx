@@ -3,67 +3,56 @@ import { useState } from "react";
 import { useDataStore } from "./stores/useDataStore";
 
 function ListNotes() {
-  const notes = useDataStore((state) => state.notes);
-  const courses = useDataStore((state) => state.courses);
+  const notes = useDataStore((state) => state.notes); // Kaikki muistiinpanot
+  const courses = useDataStore((state) => state.courses); // Kaikki kurssit
 
-  const [value, setValue] = useState("all");
-  const [courseChosen, setCourseChosen] = useState(false);
+  const [value, setValue] = useState("all"); // Valittu kurssi ("all" = kaikki)
 
-  const handleChangeDropdown = (e_select) => {
-    // console.log(e_select.target.value);
-    setValue(e_select.target.value);
-    setCourseChosen(true);
-    // console.log(courseChosen);
+  // Dropdownin muutoksen käsittely
+  const handleChangeDropdown = (e) => {
+    setValue(e.target.value);
   };
 
+  // Suodatetut muistiinpanot valitun kurssin mukaan
+  const filteredNotes =
+    value === "all" ? notes : notes.filter((note) => note.course.id == value);
+
   return (
-    <div>
-      <div>
-        <div>
-          <div>
-            <span className="text-xl p-2">Kurssi: </span>
-            <select
-              className="bg-white w-auto h-auto mb-5 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={value}
-              onChange={(e_select) => handleChangeDropdown(e_select)}
-            >
-              <option value="all">Kaikki</option>
-              {courses.map((course, i) => {
-                return (
-                  <option value={course.id} key={course.id}>
-                    {course.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
-        {courseChosen && (
-          <div>
-            <div>
-              {notes.filter((note) => note.course.id == value).length == 0 &&
-              value != "all" ? (
-                <p>Ei muistiinpanoja!</p>
-              ) : (
-                notes
-                  .filter((note) => note.course.id == value)
-                  .map((note) => <CourseRow notes={note} key={note.id} />)
-              )}
-            </div>
-          </div>
-        )}
-        {value == "all" && notes.length > 0 && (
-          <div>
-            {notes.map((note, i) => {
-              {
-                return <CourseRow notes={note} key={note.id} />;
-              }
-            })}
-          </div>
-        )}
+    <div className="max-w-4xl mx-auto mt-5 px-6">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        📒 Muistiinpanot
+      </h2>
+
+      {/* Kurssivalitsin */}
+      <div className="mb-8 flex justify-center">
+        <select
+          className="w-60 p-3 border border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          value={value}
+          onChange={handleChangeDropdown}
+        >
+          <option value="all">Kaikki kurssit</option>
+          {courses.map((course) => (
+            <option value={course.id} key={course.id}>
+              {course.name}
+            </option>
+          ))}
+        </select>
       </div>
-      {notes.length == 0 && value == "all" && <p>Ei muistiinpanoja!</p>}
+
+      {/* Muistiinpanojen listaus */}
+      {filteredNotes.length === 0 ? (
+        <p className="text-center text-gray-500 text-lg font-medium">
+          Ei muistiinpanoja!
+        </p>
+      ) : (
+        <div className="grid gap-4">
+          {filteredNotes.map((note) => (
+            <CourseRow notes={note} key={note.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
 export default ListNotes;
