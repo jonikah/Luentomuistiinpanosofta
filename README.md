@@ -9,8 +9,9 @@ Jokainen muistiinpano liitetään tiettyyn opintojaksoon, ja käyttäjä voi hel
 - Kirjoittaa muistiinpanoja valittuun opintojaksoon
 - Selailla ja hakea kaikkia muistiinpanoja tai valittujen kurssien muistiinpanoja
 
-Kaikki tallennukset tapahtuvat paikallisesti, ja sovellus hakee käynnistyessään oletuskurssit ja muistiinpanot.
-
+Kaikki tallennukset tapahtuvat paikallisesti Zustand-storeen, mutta sovellus hakee käynnistyessään oletuskurssit ja muistiinpanot JSON-muodossa kahdesta erillisestä API-endpointista:
+- [Kurssit](https://luentomuistiinpano-api.netlify.app/.netlify/functions/courses)
+- [Muistiinpanot](https://luentomuistiinpano-api.netlify.app/.netlify/functions/notes)
 ---
 
 ## Sovelluksen rakenne
@@ -57,3 +58,5 @@ npm run dev
 ```bash
 http://localhost:5173
 ```
+<img width="1192" height="1283" alt="image" src="https://github.com/user-attachments/assets/e0d4b3a2-1481-4c93-ae3f-99062bdccaba" />
+
