@@ -41,28 +41,44 @@ Kaikki tallennukset tapahtuvat paikallisesti Zustand-storeen, mutta sovellus hak
 
 ## Asennus ja käynnistys kehitysversiona
 
-1. **Asenna projektin riippuvuudet**
+1. **Kloonaa projekti GitHubista**
+```bash
+git clone https://github.com/jonikah/Luentomuistiinpanosofta.git
+```
 
+2. **Siirry projektihakemistoon**
+```bash
+cd Luentomuistiinpanosofta
+```
+
+3. **Asenna riippuvuudet**
 ```bash
 npm install
 ```
-
-2. **Käynnistä sovellus kehitystilassa**
-
+4. **Käynnistä sovellus kehitystilassa**
 ```bash
 npm run dev
 ```
 
-3. **Avaa selaimessa:**
-
+5. **Avaa selaimessa**
 ```bash
 http://localhost:5173
 ```
 
 
+
+
+
 <img width="976" height="1045" alt="image" src="https://github.com/user-attachments/assets/665833f2-e22e-4090-b713-c968ee223778" />
+
+
 <img width="976" height="1046" alt="image" src="https://github.com/user-attachments/assets/280b263f-7a2b-41cf-afbf-3d25e5ae0f46" />
+
+
 <img width="979" height="1047" alt="image" src="https://github.com/user-attachments/assets/7c5ddbae-983b-4517-aea6-04aeec7bd537" />
+
+
 <img width="974" height="1046" alt="image" src="https://github.com/user-attachments/assets/8cfe2390-a39d-457c-92b8-c10e43c8ee0d" />
+
 
 
