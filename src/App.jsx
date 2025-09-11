@@ -46,8 +46,6 @@ function Layout() {
       <main className="max-w-4xl mx-auto">
         <Outlet /> {/* Outlet näyttää aktiivisen reitin komponentin */}
       </main>
-
-      {/* Fixed footer */}
       <Footer />
     </div>
   );

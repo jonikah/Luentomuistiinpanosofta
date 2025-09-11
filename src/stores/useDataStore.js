@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+// Funktio kurssien hakemiseen API:sta
 const getCourses = async () => {
   const url =
     "https://luentomuistiinpano-api.netlify.app/.netlify/functions/courses";
@@ -9,6 +10,7 @@ const getCourses = async () => {
   return apiCourses;
 };
 
+// Funktio muistiinpanojen hakemiseen API:sta
 const getNotes = async () => {
   const url =
     "https://luentomuistiinpano-api.netlify.app/.netlify/functions/notes";
@@ -18,24 +20,28 @@ const getNotes = async () => {
   return apiNotes;
 };
 
+// Zustand store
 const useDataStore = create((set) => ({
   // courses: courses_orig,
   // notes: notes_orig,
-  courses: [],
-  notes: [],
-  noteId: 0,
+  courses: [], // Lista kursseista
+  notes: [], // Lista muistiinpanoista
+  noteId: 0, // Seuraavan muistiinpanon id
 
+  // Hae kurssit API:sta ja aseta stateen
   fetchCourses: async () => {
     const apiCourses = await getCourses();
     set({ courses: apiCourses });
   },
 
+  // Hae muistiinpanot API:sta ja aseta stateen
   fetchNotes: async () => {
     const apiNotes = await getNotes();
     set({ notes: apiNotes });
-    set({ noteId: apiNotes.length });
+    set({ noteId: apiNotes.length }); // seuraava id jatkuu olemassa olevista
   },
 
+  // Lisää uusi muistiinpano tiettyyn kurssiin
   addNote: (note, courseId) =>
     set((state) => ({
       notes: [
@@ -63,13 +69,16 @@ const useDataStore = create((set) => ({
       ],
     })),
 
+  // Kasvata noteId yhdellä, kutsutaan addNote:n jälkeen
   incrementNoteId: () => set((state) => ({ noteId: state.noteId + 1 })),
 
+  // Poista muistiinpano id:n perusteella
   deleteNote: (note) =>
     set((state) => ({
       notes: state.notes.filter((r) => r.id != note.id),
     })),
 
+  // Lisää uusi kurssi
   addNewCourse: (course) =>
     set((state) => ({
       courses: [
