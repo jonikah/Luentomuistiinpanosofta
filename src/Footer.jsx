@@ -8,8 +8,7 @@ function Footer() {
         {/* Teksti: copyright + nimi */}
         <p className="text-sm text-gray-500">
           © {new Date().getFullYear()}{" "}
-          <span className="font-semibold text-gray-700">Joni Kahari</span> —
-          Kaikki oikeudet pidätetään
+          <span className="font-semibold text-gray-700">Joni Kahari</span>
         </p>
       </div>
     </footer>
