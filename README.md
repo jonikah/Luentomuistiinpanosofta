@@ -69,16 +69,21 @@ http://localhost:5173
 
 
 
-<img width="976" height="1045" alt="image" src="https://github.com/user-attachments/assets/665833f2-e22e-4090-b713-c968ee223778" />
+<img width="1466" height="1349" alt="image" src="https://github.com/user-attachments/assets/a7202a63-3239-4f78-88c7-d159b27ecfd2" />
 
 
-<img width="976" height="1046" alt="image" src="https://github.com/user-attachments/assets/280b263f-7a2b-41cf-afbf-3d25e5ae0f46" />
 
 
-<img width="979" height="1047" alt="image" src="https://github.com/user-attachments/assets/7c5ddbae-983b-4517-aea6-04aeec7bd537" />
+<img width="1466" height="1352" alt="image" src="https://github.com/user-attachments/assets/af4ed71e-d26b-4ff0-a8b6-cdf1b0af9eee" />
 
 
-<img width="974" height="1046" alt="image" src="https://github.com/user-attachments/assets/8cfe2390-a39d-457c-92b8-c10e43c8ee0d" />
+
+<img width="1464" height="1339" alt="image" src="https://github.com/user-attachments/assets/8cb58856-13a6-453f-8ca7-8806bb439d7a" />
+
+
+
+<img width="1466" height="1357" alt="image" src="https://github.com/user-attachments/assets/825b2ea2-60d2-49f1-a6aa-9c05cf397e36" />
+
 
 
 
