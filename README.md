@@ -66,6 +66,11 @@ http://localhost:5173
 ```
 
 
+## Live demo
+
+🌐 Katso web-sovellus täällä: [KurssiKaveri](https://kurssikaveri.netlify.app/)
+
+##
 
 
 
