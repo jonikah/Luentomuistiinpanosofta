@@ -38,7 +38,7 @@ function Header() {
         </div>
 
         {/* Keskimmäinen sarake: mobiili-logo + teksti + navigaatio */}
-        <div className="flex flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-center col-span-3 sm:col-span-1">
+        <div className="flex flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-center col-span-3 sm:col-span-1 px-4 sm:px-0">
           {/* Mobiilissa keskelle logo + pieni teksti */}
           <div className="sm:hidden flex flex-col items-center mb-1">
             <svg
@@ -66,7 +66,7 @@ function Header() {
           </div>
 
           {/* Navigaatio: linkit vierekkäin */}
-          <nav className="flex space-x-4 sm:space-x-8 text-base font-medium">
+          <nav className="flex space-x-4 sm:space-x-8 text-base font-medium w-full justify-center">
             <Link
               className="text-gray-700 hover:text-indigo-600 transition-colors duration-200"
               to="/"
@@ -106,6 +106,5 @@ function Header() {
     </header>
   );
 }
-
 // Viedään komponentti käyttöön muualle sovelluksessa
 export default Header;
