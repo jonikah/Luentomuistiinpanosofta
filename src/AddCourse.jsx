@@ -57,7 +57,7 @@ function AddCourse() {
             <span className="font-semibold">
               "{courses[courses.length - 1].name}"
             </span>{" "}
-            lisätty (ID: {courses.length})
+            lisätty (ID: {courses.length - 1})
           </p>
         )}
       </div>
